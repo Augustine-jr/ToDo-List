@@ -1,4 +1,12 @@
-const todoList = ['make dinner', 'wash dishes', 'feed the dog']; // Create array to store todos
+const todoList = [{
+  name: 'make dinner', 
+  dueDate: '24/08/2024'
+}, {
+  name: 'wash dishes', 
+  dueDate: '29/08/2024'
+}, {
+  name: 'feed the dog',
+  dueDate: '30/08/2024'}]; // Create array to store todos,i'm grouping the name the due date together using an object
 
 /*For Pratice 2 if we click something in the text box
 and click add it will display it on page instead of the console as in pratice 2*/
@@ -12,15 +20,26 @@ and click add it will display it on page instead of the console as in pratice 2*
  renderTodoList()
 function renderTodoList() {
 
+
       let todoListHTML = '';
 
       for (let i = 0; i < todoList.length; i++) {
-        const todo = todoList[i];
-        const html = `<p>${todo}</p>`; // this technique is called generating the HTML
+        const todoObject = todoList[i];
+       //const name = todoObject.name;
+        //const dueDate = todoObject.dueDate;
+        const { name, dueDate } = todoObject; //This is callled destructuring
+        const html = `
+        <p>
+          ${name} ${dueDate}
+          <button onclick="
+            todoList.splice(${i}, 1);
+            renderTodoList(); 
+          ">Delete</button>
+        </p>
+        `; // this technique is called generating the HTML
         todoListHTML += html; // Add the HTML to the todoListHTML
       }
 
-      console.log(todoListHTML);
 
       document.querySelector('.js-todo-list').innerHTML = todoListHTML; // Display the todoListHTML in the webpage
 }
@@ -28,10 +47,16 @@ function renderTodoList() {
 function addTodo() {  // When we click "Add",
   const inputElement = document.querySelector('.js-name-input');
   const name = inputElement.value;  //  Get text from textbox *the .value property represents the text in the textbox
+
+  const inputDateElement = document.querySelector('.js-due-date-input');
+  const dueDate = inputDateElement.value; //  Get text from textbox *the.value property represents the text in the textbox
   
 
-  todoList.push(name); // Add name variable to array .push() will add a value to the end of the array
-  console.log(todoList); // console.log the array
+  todoList.push({
+   // name: name,
+    //dueDate: dueDate,
+    name,
+    dueDate}); // Add name variable to array .push() will add a value to the end of the array
 
   inputElement.value = ''; // this will make the text in the textbox become empty when we click add
   renderTodoList(); // Update the webpage to display the new todo
