@@ -18,7 +18,11 @@ and click add it will display it on page instead of the console as in pratice 2*
 
 // Render function
  renderTodoList()
-function renderTodoList() {
+
+ /*const renderTodoList = () => {
+
+ };*/
+function renderTodoList() { // i left this on a regular function syntax because it is easier to read and Hoisting(which means we can call this function before we create it)
 
 
       let todoListHTML = '';
@@ -26,7 +30,7 @@ function renderTodoList() {
       // Loop through the array and generate HTML for each todo
       // The destructuring syntax allows us to access properties of an object directly, without using the dot notation (e.g., todoObject.name)
       // this bellow is the for each  method of looping through an array
-      todoList.forEach(function(todoObject, index) {
+      todoList.forEach((todoObject, index) => {  // used arrow function here because we are passing a function inside another function
         const { name, dueDate } = todoObject; //This is callled destructuring
         const html = `
         <div>${name}</div>
