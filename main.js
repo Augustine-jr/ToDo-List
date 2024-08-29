@@ -23,7 +23,24 @@ function renderTodoList() {
 
       let todoListHTML = '';
 
-      for (let i = 0; i < todoList.length; i++) {
+      // Loop through the array and generate HTML for each todo
+      // The destructuring syntax allows us to access properties of an object directly, without using the dot notation (e.g., todoObject.name)
+      // this bellow is the for each  method of looping through an array
+      todoList.forEach(function(todoObject, index) {
+        const { name, dueDate } = todoObject; //This is callled destructuring
+        const html = `
+        <div>${name}</div>
+        <div>${dueDate}</div>
+          <button onclick="
+            todoList.splice(${index}, 1);
+            renderTodoList(); 
+          " class="delete-todo-button">Delete</button>
+        `; // this technique is called generating the HTML
+        todoListHTML += html; // Add the HTML to the todoListHTML
+      })
+
+      //this below is the for loop method of looping through an array
+      /*for (let i = 0; i < todoList.length; i++) {
         const todoObject = todoList[i];
        //const name = todoObject.name;
         //const dueDate = todoObject.dueDate;
@@ -37,7 +54,7 @@ function renderTodoList() {
           " class="delete-todo-button">Delete</button>
         `; // this technique is called generating the HTML
         todoListHTML += html; // Add the HTML to the todoListHTML
-      }
+      }*/
 
 
       document.querySelector('.js-todo-list').innerHTML = todoListHTML; // Display the todoListHTML in the webpage
