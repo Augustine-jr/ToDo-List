@@ -67,6 +67,7 @@ function renderTodoList() { // i left this on a regular function syntax because 
       document.querySelectorAll('.js-delete-button')
        .forEach((deleteButton, index) => {
           deleteButton.addEventListener('click', () => {
+            //console.log(index); //outputs 0, even tho the index gets deleted down right away, if we click one of deleted button later on it still has access to index, this is called a closure
             todoList.splice(index, 1); // Remove the todo from the array
             renderTodoList(); // Update the webpage to display the remaining todos
           });
